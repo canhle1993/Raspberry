@@ -98,3 +98,20 @@ flowchart LR
   classDef pinkWire stroke:#ff66cc,stroke-width:2px;
 
 ```
+
+```mermaid
+flowchart TD
+    S([Bắt đầu]) --> C1[Đọc cảm biến: Soil, Temp, PIR, MQ-135, HC-SR04]
+    
+    C1 --> D1{Soil < 45%?}
+    D1 -- Không --> D2{Temp ≥ 30°C?}
+    D1 -- Có --> D3{Nước > 10cm?}
+    
+    D3 -- Không --> A3[Báo LED đỏ: Hết nước] --> End([Kết thúc])
+    D3 -- Có --> D4{PIR phát hiện người?}
+    D4 -- Có --> End
+    D4 -- Không --> A1[Bật bơm 10–20s] --> End
+    
+    D2 -- Có --> A2[Bật quạt] --> End
+    D2 -- Không --> A4[LED xanh: Trạng thái OK] --> End
+```
